@@ -208,7 +208,7 @@ namespace CULMS.ViewModel.DashboardVM
             finally
             {
                 IsLoading = false;
-            }
+            } 
         });
         public Command HideLogoutPopupCommand => new Command(() =>
         {
