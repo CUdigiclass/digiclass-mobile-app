@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="CULMS.View.Dashboard.NewPDFView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:CULMS.CustomRenderer"
+    xmlns:vm="clr-namespace:CULMS.ViewModel.DashboardVM"
+    NavigationPage.HasNavigationBar="False">
+    <ContentPage.BindingContext>
+        <vm:NewPDFViewVM x:Name="vm" />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid>
+            <Grid RowDefinitions="60,*">
+                <Grid>
+                    <Grid.Background>
+                        <!--  StartPoint defaults to (0,0)  -->
+                        <LinearGradientBrush EndPoint="1,0">
+                            <GradientStop Offset="0.1" Color="#160101" />
+                            <GradientStop Offset="1.0" Color="#920606" />
+                        </LinearGradientBrush>
+                    </Grid.Background>
+                    <!--<Label
+                        FontAttributes="Bold"
+                        FontSize="22"
+                        HorizontalTextAlignment="Center"
+                        Text="PDF"
+                        TextColor="White"
+                        VerticalOptions="CenterAndExpand">
+                    -->
+                    <!--<Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                        </Label.GestureRecognizers>-->
+                    <!--
+                    </Label>-->
+                    <Frame
+                        Margin="20,0,0,0"
+                        Padding="0"
+                        CornerRadius="18"
+                        HeightRequest="36"
+                        HorizontalOptions="StartAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        WidthRequest="36">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding BackCommand}" />
+                        </Frame.GestureRecognizers>
+                        <Image
+                            BackgroundColor="White"
+                            HeightRequest="25"
+                            HorizontalOptions="CenterAndExpand"
+                            Rotation="180"
+                            Source="ForwardIcon"
+                            VerticalOptions="CenterAndExpand"
+                            WidthRequest="25">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BackCommand}" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </Frame>
+                    <ImageButton
+                        Margin="0,0,10,0"
+                        BackgroundColor="Transparent"
+                        Clicked="TapGestureRecognizer_Tapped"
+                        HeightRequest="30"
+                        HorizontalOptions="EndAndExpand"
+                        Source="downloadicon"
+                        VerticalOptions="CenterAndExpand"
+                        WidthRequest="30" />
+                </Grid>
+                <controls:PDFView
+                    x:Name="pdfView"
+                    Grid.Row="1"
+                    HeightRequest="1000"
+                    HorizontalOptions="CenterAndExpand"
+                    IsPDF="True"
+                    VerticalOptions="CenterAndExpand"
+                    WidthRequest="1000" />
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

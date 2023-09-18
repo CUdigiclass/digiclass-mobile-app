@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="CULMS.View.Dashboard.QuizResultPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviour="clr-namespace:CULMS.Behaviours"
+    xmlns:partialview="clr-namespace:CULMS.View.PartialView"
+    xmlns:vm="clr-namespace:CULMS.ViewModel.DashboardVM"
+    NavigationPage.HasNavigationBar="False">
+    <ContentPage.BindingContext>
+        <vm:QuizResultPageVM x:Name="vm" />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid>
+            <Grid RowDefinitions="60,*">
+                <ScrollView Grid.Row="1">
+                    <StackLayout Margin="16">
+                        <Label FontSize="18" TextColor="Black">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span FontAttributes="Bold" Text="Total marks: " />
+                                    <Span FontSize="14" Text="{Binding TotalMarks}" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Label FontSize="18" TextColor="Black">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span FontAttributes="Bold" Text="Obtain marks: " />
+                                    <Span FontSize="14" Text="{Binding ObtainMarks}" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Label FontSize="18" TextColor="Black">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span FontAttributes="Bold" Text="Attempt question: " />
+                                    <Span FontSize="14" Text="{Binding AttemptQuestion}" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Label FontSize="18" TextColor="Black">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span FontAttributes="Bold" Text="Total question: " />
+                                    <Span FontSize="14" Text="{Binding TotalQuestion}" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Label FontSize="18" TextColor="Black">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span FontAttributes="Bold" Text="Total correct question: " />
+                                    <Span FontSize="14" Text="{Binding TotalCorrectQs}" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Label FontSize="18" TextColor="Black">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span FontAttributes="Bold" Text="Total incorrect question: " />
+                                    <Span FontSize="14" Text="{Binding TotalInCorrectQs}" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Button
+                            Margin="0,20,0,10"
+                            BackgroundColor="#2c3138"
+                            Command="{Binding HomeCommand}"
+                            CommandParameter="{Binding}"
+                            CornerRadius="20"
+                            HeightRequest="40"
+                            HorizontalOptions="CenterAndExpand"
+                            Text="Home"
+                            TextColor="White"
+                            TextTransform="None"
+                            WidthRequest="120">
+                            <Button.Background>
+                                <!--  StartPoint defaults to (0,0)  -->
+                                <LinearGradientBrush EndPoint="1,0">
+                                    <GradientStop Offset="0.1" Color="#160101" />
+                                    <GradientStop Offset="1.0" Color="#920606" />
+                                </LinearGradientBrush>
+                            </Button.Background>
+                        </Button>
+                    </StackLayout>
+                </ScrollView>
+                <Grid>
+                    <Grid.Background>
+                        <!--  StartPoint defaults to (0,0)  -->
+                        <LinearGradientBrush EndPoint="1,0">
+                            <GradientStop Offset="0.1" Color="#160101" />
+                            <GradientStop Offset="1.0" Color="#920606" />
+                        </LinearGradientBrush>
+                    </Grid.Background>
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="22"
+                        HorizontalTextAlignment="Center"
+                        Text="Result"
+                        TextColor="White"
+                        VerticalOptions="CenterAndExpand" />
+                </Grid>
+            </Grid>
+            <partialview:LoaderView IsVisible="{Binding IsLoading}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

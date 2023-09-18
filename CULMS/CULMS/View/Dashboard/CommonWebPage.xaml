@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="CULMS.View.Dashboard.CommonWebPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:CULMS.ViewModel.DashboardVM"
+    NavigationPage.HasNavigationBar="False">
+    <ContentPage.BindingContext>
+        <vm:CommonWebPageVM x:Name="vm" />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid>
+            <Grid RowDefinitions="60,*">
+                <!--  WebView needs to be given height and width request within layouts to render.  -->
+                <StackLayout Grid.Row="1">
+                    <ProgressBar
+                        x:Name="progress"
+                        HorizontalOptions="FillAndExpand"
+                        IsVisible="True"
+                        Progress="0.2" />
+                    <WebView
+                        x:Name="webView"
+                        HeightRequest="1000"
+                        WidthRequest="1000" />
+                </StackLayout>
+                <Grid>
+                    <Grid.Background>
+                        <!--  StartPoint defaults to (0,0)  -->
+                        <LinearGradientBrush EndPoint="1,0">
+                            <GradientStop Offset="0.1" Color="#160101" />
+                            <GradientStop Offset="1.0" Color="#920606" />
+                        </LinearGradientBrush>
+                    </Grid.Background>
+                    <!--<Label
+                        FontAttributes="Bold"
+                        FontSize="22"
+                        HorizontalTextAlignment="Center"
+                        Text="Course Content"
+                        TextColor="White"
+                        VerticalOptions="CenterAndExpand" />-->
+                    <Frame
+                        Margin="20,0,0,0"
+                        Padding="0"
+                        CornerRadius="18"
+                        HeightRequest="36"
+                        HorizontalOptions="StartAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        WidthRequest="36">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding BackCommand}" />
+                        </Frame.GestureRecognizers>
+                        <Image
+                            BackgroundColor="White"
+                            HeightRequest="25"
+                            HorizontalOptions="CenterAndExpand"
+                            Rotation="180"
+                            Source="ForwardIcon"
+                            VerticalOptions="CenterAndExpand"
+                            WidthRequest="25">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BackCommand}" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </Frame>
+                </Grid>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="CULMS.View.Dashboard.MessagePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:partialview="clr-namespace:CULMS.View.PartialView"
+    xmlns:vm="clr-namespace:CULMS.ViewModel.DashboardVM" 
+    NavigationPage.HasNavigationBar="False">
+    <ContentPage.BindingContext>
+        <vm:MessagePageVM x:Name="vm" />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid>
+            <Grid RowDefinitions="60,*,60">
+                <ScrollView Grid.Row="1" VerticalScrollBarVisibility="Never">
+                    <StackLayout>
+                        <StackLayout x:Name="AnnouncementList" BindableLayout.ItemsSource="{Binding AnnouncementList}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame
+                                        Padding="0"
+                                        BackgroundColor="White"
+                                        CornerRadius="20"
+                                        HasShadow="False"
+                                        IsClippedToBounds="True">
+                                        <Grid
+                                            x:Name="MainGrid"
+                                            Margin="20,20,20,10"
+                                            RowDefinitions="Auto,Auto,Auto">
+                                            <Label
+                                                Grid.Row="0"
+                                                FontAttributes="Bold"
+                                                FontSize="18"
+                                                Text="{Binding AnnouncementType}"
+                                                TextColor="Black" />
+                                            <Label
+                                                Grid.Row="1"
+                                                Text="{Binding Announcements}"
+                                                TextColor="Black" />
+                                            <StackLayout
+                                                Grid.Row="2"
+                                                Orientation="Horizontal"
+                                                VerticalOptions="CenterAndExpand">
+                                                <StackLayout.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding Source={x:Reference AnnouncementList}, Path=BindingContext.GlobalAnnouncementPDFCommand}" CommandParameter="{Binding Source={x:Reference MainGrid}, Path=BindingContext}" />
+                                                </StackLayout.GestureRecognizers>
+                                                <Label Text="{Binding FileName}" TextColor="Black" />
+                                                <Image
+                                                    BackgroundColor="Transparent"
+                                                    HeightRequest="20"
+                                                    Source="{Binding PDFIcon}"
+                                                    VerticalOptions="CenterAndExpand"
+                                                    WidthRequest="20" />
+                                            </StackLayout>
+                                        </Grid>
+                                    </Frame>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                            <!--<BindableLayout.EmptyView>
+                                <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                    <Label
+                                        Margin="0,20,0,0"
+                                        FontAttributes="Bold"
+                                        Text="No announcement available."
+                                        TextColor="Black" />
+                                </StackLayout>
+                            </BindableLayout.EmptyView>-->
+                        </StackLayout>
+                        <StackLayout x:Name="CourseAnnouncementList" BindableLayout.ItemsSource="{Binding CourseAnnouncementList}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame
+                                        Padding="0"
+                                        BackgroundColor="White"
+                                        CornerRadius="20"
+                                        HasShadow="False"
+                                        IsClippedToBounds="True">
+                                        <Grid
+                                            x:Name="CourseMainGrid"
+                                            Margin="20,20,20,10"
+                                            RowDefinitions="Auto,Auto,Auto">
+                                            <Label
+                                                Grid.Row="0"
+                                                FontAttributes="Bold"
+                                                FontSize="18"
+                                                Text="{Binding AnnouncementType}"
+                                                TextColor="Black" />
+                                            <Label
+                                                Grid.Row="1"
+                                                Text="{Binding Announcements}"
+                                                TextColor="Black" />
+                                            <StackLayout
+                                                Grid.Row="2"
+                                                Orientation="Horizontal"
+                                                VerticalOptions="CenterAndExpand">
+                                                <StackLayout.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding Source={x:Reference CourseAnnouncementList}, Path=BindingContext.CourseAnnouncementPDFCommand}" CommandParameter="{Binding Source={x:Reference CourseMainGrid},Path=BindingContext}}" />
+                                                </StackLayout.GestureRecognizers>
+                                                <Label Text="{Binding FileName}" TextColor="Black" />
+                                                <Image
+                                                    BackgroundColor="Transparent"
+                                                    HeightRequest="20"
+                                                    Source="{Binding PDFIcon}"
+                                                    VerticalOptions="CenterAndExpand"
+                                                    WidthRequest="20" />
+                                            </StackLayout>
+                                        </Grid>
+                                    </Frame>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
+                        <StackLayout x:Name="StreamAnnouncementList" BindableLayout.ItemsSource="{Binding StreamAnnouncementList}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame
+                                        Padding="0"
+                                        BackgroundColor="White"
+                                        CornerRadius="20"
+                                        HasShadow="False"
+                                        IsClippedToBounds="True">
+                                        <Grid
+                                            x:Name="StreamMainGrid"
+                                            Margin="20,20,20,10"
+                                            RowDefinitions="Auto,Auto,Auto">
+                                            <Label
+                                                Grid.Row="0"
+                                                FontAttributes="Bold"
+                                                FontSize="18"
+                                                Text="{Binding AnnouncementType}"
+                                                TextColor="Black" />
+                                            <Label
+                                                Grid.Row="1"
+                                                Text="{Binding Announcements}"
+                                                TextColor="Black" />
+                                            <StackLayout
+                                                Grid.Row="2"
+                                                Orientation="Horizontal"
+                                                VerticalOptions="CenterAndExpand">
+                                                <StackLayout.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding Source={x:Reference StreamAnnouncementList}, Path=BindingContext.StreamAnnouncementPDFCommand}" CommandParameter="{Binding Source={x:Reference StreamMainGrid}, Path=BindingContext}" />
+                                                </StackLayout.GestureRecognizers>
+                                                <Label Text="{Binding FileName}" TextColor="Black" />
+                                                <Image
+                                                    BackgroundColor="Transparent"
+                                                    HeightRequest="20"
+                                                    Source="{Binding PDFIcon}"
+                                                    VerticalOptions="CenterAndExpand"
+                                                    WidthRequest="20" />
+                                            </StackLayout>
+                                        </Grid>
+                                    </Frame>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
+                    </StackLayout>
+                </ScrollView>
+                <Grid>
+                    <Grid.Background>
+                        <!--  StartPoint defaults to (0,0)  -->
+                        <LinearGradientBrush EndPoint="1,0">
+                            <GradientStop Offset="0.1" Color="#160101" />
+                            <GradientStop Offset="1.0" Color="#920606" />
+                        </LinearGradientBrush>
+                    </Grid.Background>
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="22"
+                        HorizontalTextAlignment="Center"
+                        Text="Announcements"
+                        TextColor="White"
+                        VerticalOptions="CenterAndExpand" />
+                </Grid>
+                <partialview:TabbedView Grid.Row="2" />
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

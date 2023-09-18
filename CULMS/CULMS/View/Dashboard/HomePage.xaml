@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="CULMS.View.Dashboard.HomePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behavior="clr-namespace:CULMS.Behaviours"
+    xmlns:partialview="clr-namespace:CULMS.View.PartialView"
+    xmlns:vm="clr-namespace:CULMS.ViewModel.DashboardVM"
+    BackgroundColor="White"
+    NavigationPage.HasNavigationBar="False">
+    <ContentPage.BindingContext>
+        <vm:HomePageVM x:Name="vm" />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid RowSpacing="0">
+            <Grid RowDefinitions="60,*,60" RowSpacing="0">
+                <ScrollView
+                    Grid.Row="1"
+                    BackgroundColor="White"
+                    VerticalOptions="FillAndExpand"
+                    VerticalScrollBarVisibility="Never">
+                    <StackLayout>
+                        <Grid
+                            Margin="16"
+                            HeightRequest="130"
+                            IsClippedToBounds="True"
+                            IsEnabled="{Binding IsEnableCatalogGrid}">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding NewCourseCommand}" />
+                            </Grid.GestureRecognizers>
+                            <Image Aspect="AspectFill" Source="course1" />
+                            <Frame
+                                BackgroundColor="Black"
+                                CornerRadius="0"
+                                HasShadow="False"
+                                IsClippedToBounds="True"
+                                Opacity=".6" />
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="22"
+                                HorizontalTextAlignment="Center"
+                                Text="Catalog"
+                                TextColor="White"
+                                VerticalTextAlignment="Center" />
+                        </Grid>
+                        <Grid
+                            Margin="16"
+                            HeightRequest="130"
+                            IsClippedToBounds="True">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding EnrolledCourseCommand}" />
+                            </Grid.GestureRecognizers>
+                            <Image Aspect="AspectFill" Source="course2" />
+                            <Frame
+                                BackgroundColor="Black"
+                                CornerRadius="0"
+                                HasShadow="False"
+                                IsClippedToBounds="True"
+                                Opacity=".6" />
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="22"
+                                HorizontalTextAlignment="Center"
+                                Text="My &#10;Courses"
+                                TextColor="White"
+                                VerticalTextAlignment="Center" />
+                        </Grid>
+                        <Label
+                            Margin="16,0,0,0"
+                            FontAttributes="Bold"
+                            FontSize="18"
+                            Text="Enrolled Courses"
+                            TextColor="Black" />
+                        <ScrollView HorizontalScrollBarVisibility="Never">
+                            <StackLayout
+                                x:Name="EnrolledCourseList"
+                                Margin="16"
+                                BindableLayout.ItemsSource="{Binding EnrolledCourseList}">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate>
+                                        <Frame
+                                            x:Name="MainGrid"
+                                            Margin="0,0,0,20"
+                                            Padding="0"
+                                            CornerRadius="10"
+                                            HasShadow="False"
+                                            HeightRequest="250"
+                                            HorizontalOptions="FillAndExpand"
+                                            IsClippedToBounds="True"
+                                            VerticalOptions="CenterAndExpand"
+                                            WidthRequest="200">
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference EnrolledCourseList}, Path=BindingContext.CourseDetailPageCommand}" CommandParameter="{Binding Source={x:Reference MainGrid}, Path=BindingContext}" />
+                                            </Frame.GestureRecognizers>
+                                            <Grid
+                                                IsClippedToBounds="True"
+                                                RowDefinitions="78*,2*,20*"
+                                                RowSpacing="0">
+                                                <Image
+                                                    Aspect="Fill"
+                                                    BackgroundColor="Transparent"
+                                                    Source="{Binding BannerImageName}" />
+                                                <BoxView
+                                                    Grid.Row="1"
+                                                    BackgroundColor="#444b53"
+                                                    HorizontalOptions="FillAndExpand"
+                                                    VerticalOptions="CenterAndExpand" />
+                                                <StackLayout
+                                                    Grid.Row="2"
+                                                    Background="#2c3138"
+                                                    IsClippedToBounds="True"
+                                                    Spacing="0">
+                                                    <!--<Label
+                                                        Margin="5,5,0,0"
+                                                        Text="{Binding AutherName}"
+                                                        TextColor="White" />-->
+                                                    <Label
+                                                        Margin="5,0,0,5"
+                                                        Text="{Binding CourseName}"
+                                                        TextColor="White"
+                                                        VerticalOptions="CenterAndExpand" />
+                                                </StackLayout>
+                                            </Grid>
+                                        </Frame>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                                <BindableLayout.EmptyView>
+                                    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                        <Label
+                                            Margin="0,20,0,0"
+                                            FontAttributes="Bold"
+                                            Text="No Enroll course available."
+                                            TextColor="Black" />
+                                    </StackLayout>
+                                </BindableLayout.EmptyView>
+                            </StackLayout>
+                        </ScrollView>
+                        <StackLayout IsVisible="false" Spacing="0">
+                            <Label
+                                x:Name="txtName"
+                                FontSize="18"
+                                Text="{Binding Name}" />
+                            <Label
+                                x:Name="txtEmail"
+                                FontSize="18"
+                                Text="{Binding Email}" />
+                            <Image
+                                x:Name="imgProfile"
+                                HeightRequest="150"
+                                Source="{Binding UserImage}"
+                                WidthRequest="150" />
+                        </StackLayout>
+                    </StackLayout>
+                </ScrollView>
+                <Grid BackgroundColor="Gray">
+                    <Grid.Background>
+                        <!--  StartPoint defaults to (0,0)  -->
+                        <LinearGradientBrush EndPoint="1,0">
+                            <GradientStop Offset="0.1" Color="#160101" />
+                            <GradientStop Offset="1.0" Color="#920606" />
+                        </LinearGradientBrush>
+                    </Grid.Background>
+                    <ImageButton
+                        Margin="20,0,0,0"
+                        BackgroundColor="Transparent"
+                        Command="{Binding HamburgerClicked}"
+                        HeightRequest="25"
+                        HorizontalOptions="StartAndExpand"
+                        Source="HamburgerMenu"
+                        WidthRequest="25" />
+                    <ImageButton
+                        Margin="0,0,20,0"
+                        BackgroundColor="Transparent"
+                        Command="{Binding ShowLogoutFrame}"
+                        HeightRequest="25"
+                        HorizontalOptions="EndAndExpand"
+                        Source="logout_white"
+                        WidthRequest="25" />
+                </Grid>
+                <partialview:TabbedView Grid.Row="2" />
+            </Grid>
+
+            <partialview:HamburgerMenu
+                HorizontalOptions="FillAndExpand"
+                IsVisible="{Binding HamburgerVisibility}"
+                VerticalOptions="FillAndExpand" />
+            <Grid IsVisible="{Binding IsVisibleLogoutFrame}">
+                <Grid.Behaviors>
+                    <behavior:FadingBehavior />
+                </Grid.Behaviors>
+                <Grid BackgroundColor="Black" Opacity=".5">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding HideLogoutPopupCommand}" />
+                    </Grid.GestureRecognizers>
+                </Grid>
+                <Frame
+                    Margin="30"
+                    Padding="0"
+                    CornerRadius="20"
+                    HeightRequest="150"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="CenterAndExpand">
+                    <Grid RowDefinitions="30*,70*">
+                        <Label
+                            Margin="0,20,0,0"
+                            FontSize="18"
+                            HorizontalOptions="CenterAndExpand"
+                            Text="Do you want to logout?"
+                            TextColor="Black" />
+                        <Grid
+                            Grid.Row="1"
+                            ColumnDefinitions="50*,50*"
+                            ColumnSpacing="20"
+                            VerticalOptions="CenterAndExpand">
+                            <Frame
+                                Padding="0"
+                                CornerRadius="20"
+                                HeightRequest="40"
+                                HorizontalOptions="EndAndExpand"
+                                WidthRequest="100">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding LogoutCommand}" />
+                                </Frame.GestureRecognizers>
+                                <Frame.Background>
+                                    <!--  StartPoint defaults to (0,0)  -->
+                                    <LinearGradientBrush EndPoint="1,0">
+                                        <GradientStop Offset="0.1" Color="#160101" />
+                                        <GradientStop Offset="1.0" Color="#920606" />
+                                    </LinearGradientBrush>
+                                </Frame.Background>
+                                <Label
+                                    FontSize="16"
+                                    HorizontalOptions="CenterAndExpand"
+                                    Text="Yes"
+                                    TextColor="White"
+                                    VerticalOptions="CenterAndExpand" />
+                            </Frame>
+                            <Frame
+                                Grid.Column="1"
+                                Padding="0"
+                                CornerRadius="20"
+                                HeightRequest="40"
+                                HorizontalOptions="StartAndExpand"
+                                WidthRequest="100">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding HideLogoutPopupCommand}" />
+                                </Frame.GestureRecognizers>
+                                <Frame.Background>
+                                    <!--  StartPoint defaults to (0,0)  -->
+                                    <LinearGradientBrush EndPoint="1,0">
+                                        <GradientStop Offset="0.1" Color="#160101" />
+                                        <GradientStop Offset="1.0" Color="#920606" />
+                                    </LinearGradientBrush>
+                                </Frame.Background>
+                                <Label
+                                    FontSize="16"
+                                    HorizontalOptions="CenterAndExpand"
+                                    Text="No"
+                                    TextColor="White"
+                                    VerticalOptions="CenterAndExpand" />
+                            </Frame>
+                        </Grid>
+                    </Grid>
+                </Frame>
+            </Grid>
+            <partialview:LoaderView IsVisible="{Binding IsLoading}" />
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

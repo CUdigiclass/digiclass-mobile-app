@@ -1,0 +1,234 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="CULMS.View.Auth.LoginPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behavior="clr-namespace:CULMS.Behaviours"
+    xmlns:customrenderer="clr-namespace:CULMS.CustomRenderer"
+    xmlns:partialview="clr-namespace:CULMS.View.PartialView"
+    xmlns:vm="clr-namespace:CULMS.ViewModel.AuthVM">
+    <ContentPage.BindingContext>
+        <vm:LoginPageVM x:Name="vm" />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <ScrollView VerticalScrollBarVisibility="Never">
+            <Grid>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25*" />
+                        <RowDefinition Height="10*" />
+                        <RowDefinition Height="55*" />
+                        <RowDefinition Height="10*" />
+                    </Grid.RowDefinitions>
+                    <Frame
+                        Padding="0"
+                        BackgroundColor="White"
+                        CornerRadius="10"
+                        HasShadow="False"
+                        HorizontalOptions="CenterAndExpand"
+                        IsClippedToBounds="True"
+                        VerticalOptions="CenterAndExpand">
+                        <Image
+                            Margin="10"
+                            Aspect="AspectFit"
+                            HorizontalOptions="CenterAndExpand"
+                            Source="Cu_logo"
+                            VerticalOptions="CenterAndExpand"
+                            WidthRequest="180" />
+                    </Frame>
+                    <Label
+                        Grid.Row="1"
+                        FontAttributes="Bold"
+                        FontSize="30"
+                        HorizontalTextAlignment="Center"
+                        Text="Login"
+                        TextColor="#164276" />
+                    <StackLayout
+                        Grid.Row="2"
+                        Margin="30,20"
+                        Spacing="0">
+                        <Label
+                            FontFamily="OpenSansRegular"
+                            FontSize="14"
+                            Text="E-mail"
+                            TextColor="#8799af" />
+                        <Grid>
+                            <customrenderer:BorderlessEntry
+                                Margin="0,0,0,0"
+                                FontFamily="OpenSansRegular"
+                                FontSize="14"
+                                Placeholder="xyz@example.com"
+                                Text="{Binding Email}"
+                                TextColor="#194478">
+                                <!--<Entry.Behaviors>
+                                    <behavior:EmailValidatorBehavior />
+                                </Entry.Behaviors>-->
+                            </customrenderer:BorderlessEntry>
+                            <Image
+                                Margin="0,0,15,0"
+                                HeightRequest="18"
+                                HorizontalOptions="EndAndExpand"
+                                Source="userIcon"
+                                VerticalOptions="CenterAndExpand"
+                                WidthRequest="18" />
+                            <BoxView
+                                BackgroundColor="LightGray"
+                                HeightRequest="1"
+                                VerticalOptions="EndAndExpand" />
+                        </Grid>
+                        <!--<StackLayout
+                            Margin="0,2,0,0"
+                            IsVisible="{Binding IsVisibleTxtEmailError}"
+                            Orientation="Horizontal">
+                            <Image
+                                Margin="5,0,0,0"
+                                HeightRequest="10"
+                                Source="ErrorIcon"
+                                VerticalOptions="CenterAndExpand"
+                                WidthRequest="10" />
+                            <Label
+                                FontFamily="PoppinsRegular"
+                                FontSize="10"
+                                Text="{Binding MsgEmailError}"
+                                TextColor="#C80202"
+                                VerticalOptions="CenterAndExpand" />
+                        </StackLayout>-->
+                        <Label
+                            Margin="0,20,0,0"
+                            FontFamily="OpenSansRegular"
+                            FontSize="14"
+                            Text="Password"
+                            TextColor="#8799af" />
+
+                        <Grid>
+                            <customrenderer:BorderlessEntry
+                                Margin="0,0,0,0"
+                                FontFamily="OpenSansRegular"
+                                FontSize="14"
+                                IsPassword="{Binding IsPassword}"
+                                Placeholder="password"
+                                Text="{Binding Password}"
+                                TextColor="#194478" />
+                            <ImageButton
+                                Margin="0,0,15,0"
+                                BackgroundColor="Transparent"
+                                Command="{Binding ShowPasswordCommand}"
+                                HeightRequest="18"
+                                HorizontalOptions="EndAndExpand"
+                                Source="{Binding PasswordImage}"
+                                VerticalOptions="CenterAndExpand"
+                                WidthRequest="18" />
+                            <BoxView
+                                BackgroundColor="LightGray"
+                                HeightRequest="1"
+                                VerticalOptions="EndAndExpand" />
+                        </Grid>
+                        <!--<Label
+                            x:Name="ForgotPasswordLabel"
+                            Margin="0,10,0,0"
+                            FontFamily="OpenSansRegular"
+                            FontSize="14"
+                            HorizontalOptions="EndAndExpand"
+                            Text="Forgot Password?"
+                            TextColor="#8799af">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding FogotPasswordCommand}" Tapped="ForgotPassword_Clicked" />
+                            </Label.GestureRecognizers>
+                        </Label>-->
+                        <Frame
+                            x:Name="LoginFrame"
+                            Margin="0,50,0,0"
+                            Padding="0"
+                            BackgroundColor="#4498ff"
+                            CornerRadius="10"
+                            HeightRequest="50">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding LoginCommand}" />
+                                <!--  Tapped="LoginFrame_Tapped"  -->
+                            </Frame.GestureRecognizers>
+                            <Frame.Background>
+                                <!--  StartPoint defaults to (0,0)  -->
+                                <LinearGradientBrush EndPoint="1,0">
+                                    <GradientStop Offset="0.1" Color="#160101" />
+                                    <GradientStop Offset="1.0" Color="#920606" />
+                                </LinearGradientBrush>
+                            </Frame.Background>
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="16"
+                                HorizontalOptions="CenterAndExpand"
+                                Text="Login"
+                                TextColor="White"
+                                VerticalOptions="CenterAndExpand" />
+                        </Frame>
+                        <!--<Frame
+                            x:Name="GoogleLogin"
+                            Margin="0,30,0,0"
+                            Padding="0"
+                            BackgroundColor="#4498ff"
+                            BorderColor="#4498ff"
+                            CornerRadius="10"
+                            HeightRequest="50">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="btnLogin_Clicked" />
+                            </Frame.GestureRecognizers>
+                            <Grid>
+                                <Frame
+                                    Margin="1"
+                                    Padding="0"
+                                    CornerRadius="10"
+                                    HasShadow="False"
+                                    HorizontalOptions="StartAndExpand"
+                                    IsClippedToBounds="True"
+                                    WidthRequest="50">
+                                    <Image
+                                        BackgroundColor="White"
+                                        HeightRequest="35"
+                                        HorizontalOptions="CenterAndExpand"
+                                        Source="googleIcon"
+                                        VerticalOptions="CenterAndExpand"
+                                        WidthRequest="35" />
+                                </Frame>
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="16"
+                                    HorizontalOptions="CenterAndExpand"
+                                    Text="Sign in with Google"
+                                    TextColor="White"
+                                    VerticalOptions="CenterAndExpand" />
+                            </Grid>
+                        </Frame>-->
+                        <Label
+                            x:Name="txtName"
+                            FontSize="18"
+                            IsVisible="false"
+                            Text="Name: " />
+                        <Label
+                            x:Name="txtEmail"
+                            FontSize="18"
+                            IsVisible="false"
+                            Text="Email: " />
+                        <Image
+                            x:Name="imgProfile"
+                            HeightRequest="150"
+                            IsVisible="false"
+                            WidthRequest="150" />
+
+                        <Button
+                            x:Name="btnLogout"
+                            Margin="0,8,0,0"
+                            BackgroundColor="Tomato"
+                            Clicked="btnLogout_Clicked"
+                            CornerRadius="6"
+                            FontAttributes="Bold"
+                            FontSize="20"
+                            IsVisible="false"
+                            Text="Logout"
+                            TextColor="White" />
+                    </StackLayout>
+                </Grid>
+                <partialview:LoaderView IsVisible="{Binding IsLoading}" />
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

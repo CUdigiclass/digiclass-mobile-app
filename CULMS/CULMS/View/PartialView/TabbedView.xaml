@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="CULMS.View.PartialView.TabbedView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm1="clr-namespace:CULMS.ViewModel.PartialViewModel">
+    <ContentView.BindingContext>
+        <vm1:TabbedViewVM x:Name="vm" />
+    </ContentView.BindingContext>
+    <ContentView.Content>
+        <Frame
+            Padding="0"
+            BackgroundColor="#023e93"
+            CornerRadius="0"
+            HasShadow="False">
+            <Grid
+                ColumnSpacing="0"
+                HeightRequest="70"
+                HorizontalOptions="FillAndExpand"
+                RowSpacing="0"
+                VerticalOptions="End">
+                <!--<Grid.Background>
+                -->
+                <!--  StartPoint defaults to (0,0)  -->
+                <!--
+                    <LinearGradientBrush EndPoint="1,0">
+                        <GradientStop Offset="0.1" Color="#160101" />
+                        <GradientStop Offset="1.0" Color="#920606" />
+                    </LinearGradientBrush>
+                </Grid.Background>-->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="25*" />
+                    <ColumnDefinition Width="25*" />
+                    <ColumnDefinition Width="25*" />
+                    <ColumnDefinition Width="25*" />
+                </Grid.ColumnDefinitions>
+                <StackLayout
+                    Grid.Column="0"
+                    Padding="0"
+                    Spacing="0">
+                    <ImageButton
+                        Aspect="AspectFit"
+                        Command="{Binding HomeTabCommand}"
+                        CommandParameter="{Binding .}"
+                        HeightRequest="{Binding HomeImageHeight, Mode=TwoWay}"
+                        HorizontalOptions="CenterAndExpand"
+                        Source="{Binding HomeTabSelected, Mode=TwoWay}"
+                        Style="{StaticResource TabIconStyle}"
+                        VerticalOptions="{Binding HomeTabbedVerticalOptions}"
+                        WidthRequest="{Binding HomeImageHeight, Mode=TwoWay}" />
+                </StackLayout>
+                <StackLayout
+                    Grid.Column="1"
+                    Padding="0"
+                    Spacing="0">
+                    <ImageButton
+                        Aspect="AspectFit"
+                        Command="{Binding AnnouncementTabCommand}"
+                        CommandParameter="{Binding .}"
+                        HeightRequest="{Binding AnnouncementImageHeight, Mode=TwoWay}"
+                        HorizontalOptions="CenterAndExpand"
+                        Source="{Binding AnnouncementTabSelected, Mode=TwoWay}"
+                        Style="{StaticResource TabIconStyle}"
+                        VerticalOptions="{Binding AnnouncementTabbedVerticalOptions}"
+                        WidthRequest="{Binding AnnouncementImageHeight, Mode=TwoWay}" />
+                </StackLayout>
+                <StackLayout
+                    Grid.Column="2"
+                    Padding="0"
+                    Spacing="0">
+                    <ImageButton
+                        Aspect="AspectFit"
+                        Command="{Binding MessageTabCommand}"
+                        CommandParameter="{Binding .}"
+                        HeightRequest="{Binding LogoutImageHeight, Mode=TwoWay}"
+                        HorizontalOptions="CenterAndExpand"
+                        Source="{Binding LogoutTabSelected, Mode=TwoWay}"
+                        Style="{StaticResource TabIconStyle}"
+                        VerticalOptions="{Binding LogoutTabbedVerticalOptions}"
+                        WidthRequest="{Binding LogoutImageHeight, Mode=TwoWay}" />
+                </StackLayout>
+                <StackLayout
+                    Grid.Column="3"
+                    Padding="0"
+                    Spacing="0">
+                    <ImageButton
+                        Aspect="AspectFit"
+                        Command="{Binding ProfileTabCommand}"
+                        CommandParameter="{Binding .}"
+                        HeightRequest="{Binding ProfileImageHeight, Mode=TwoWay}"
+                        HorizontalOptions="CenterAndExpand"
+                        Source="{Binding ProfileTabSelected, Mode=TwoWay}"
+                        Style="{StaticResource TabIconStyle}"
+                        VerticalOptions="{Binding ProfileTabbedVerticalOptions}"
+                        WidthRequest="{Binding ProfileImageHeight, Mode=TwoWay}" />
+                </StackLayout>
+            </Grid>
+        </Frame>
+    </ContentView.Content>
+</ContentView>

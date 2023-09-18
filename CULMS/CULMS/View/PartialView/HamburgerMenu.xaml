@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="CULMS.View.PartialView.HamburgerMenu"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <ContentView.Content>
+        <Grid BackgroundColor="Transparent">
+            <Grid ColumnSpacing="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70*" />
+                    <ColumnDefinition Width="30*" />
+                </Grid.ColumnDefinitions>
+                <Grid
+                    x:Name="BlackGrid"
+                    Grid.ColumnSpan="2"
+                    BackgroundColor="Black"
+                    Opacity=".35">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                    </Grid.GestureRecognizers>
+                </Grid>
+                <Frame
+                    x:Name="HamburgerMenuView"
+                    Padding="0"
+                    CornerRadius="0"
+                    HasShadow="False"
+                    IsClippedToBounds="True">
+                    <Grid IsClippedToBounds="True">
+                        <Grid.Background>
+                            <!--  StartPoint defaults to (0,0)  -->
+                            <LinearGradientBrush EndPoint="1,0">
+                                <GradientStop Offset="0.1" Color="#160101" />
+                                <GradientStop Offset="1.0" Color="#920606" />
+                            </LinearGradientBrush>
+                        </Grid.Background>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="90*" />
+                            <RowDefinition Height="10*" />
+                        </Grid.RowDefinitions>
+                        <ScrollView VerticalScrollBarVisibility="Never">
+                            <StackLayout Margin="16">
+                                <Label TextColor="White">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span FontSize="18" Text="Welcome," />
+                                            <Span FontSize="18" Text="  " />
+                                            <Span FontSize="16" Text="{Binding UserName}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label Text="{Binding UID}" TextColor="White" />
+                                <StackLayout
+                                    x:Name="HamburgerMenuItemList"
+                                    Margin="0,10,0,0"
+                                    BindableLayout.ItemsSource="{Binding HamburgerMenuItemList}">
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackLayout
+                                                x:Name="MainStack"
+                                                Margin="0,5"
+                                                Orientation="Horizontal">
+                                                <StackLayout.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding Source={x:Reference HamburgerMenuItemList}, Path=BindingContext.HamburgerOptionCommand}" CommandParameter="{Binding Source={x:Reference MainStack}, Path=BindingContext}" />
+                                                </StackLayout.GestureRecognizers>
+                                                <!--<Label
+                                                FontFamily="FontAwesomeRegular"
+                                                FontSize="20"
+                                                Text="{Binding Icon}"
+                                                TextColor="#AFAFAF"
+                                                TextTransform="None"
+                                                VerticalOptions="CenterAndExpand"
+                                                VerticalTextAlignment="Center" />-->
+                                                <Image
+                                                    BackgroundColor="Transparent"
+                                                    HeightRequest="20"
+                                                    Source="{Binding CourseImage}"
+                                                    VerticalOptions="CenterAndExpand"
+                                                    WidthRequest="20" />
+                                                <Label
+                                                    Margin="10,0,0,0"
+                                                    FontFamily="OpenSansMedium"
+                                                    FontSize="16"
+                                                    Text="{Binding Text}"
+                                                    TextColor="White" />
+                                            </StackLayout>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </StackLayout>
+                            </StackLayout>
+                        </ScrollView>
+                        <StackLayout Grid.Row="1">
+                            <StackLayout
+                                Grid.Column="1"
+                                Spacing="5"
+                                VerticalOptions="CenterAndExpand">
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding ShowLogoutFrame}" />
+                                </StackLayout.GestureRecognizers>
+                                <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand">
+                                    <ImageButton
+                                        Margin="16,0,0,0"
+                                        BackgroundColor="Transparent"
+                                        Command="{Binding ShowLogoutFrame}"
+                                        HeightRequest="20"
+                                        Source="logout_white"
+                                        WidthRequest="20" />
+                                    <Label
+                                        Margin="5,0,0,0"
+                                        FontFamily="OpenSansMedium"
+                                        FontSize="16"
+                                        Text="Logout"
+                                        TextColor="White">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding ShowLogoutFrame}" />
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                    <Label
+                                        Margin="0,0,20,0"
+                                        FontFamily="OpenSansMedium"
+                                        FontSize="16"
+                                        HorizontalOptions="EndAndExpand"
+                                        TextColor="#B1B1B1">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="V" />
+                                                <Span Text=" " />
+                                                <Span x:Name="VersionTxt" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+                    </Grid>
+                </Frame>
+
+            </Grid>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

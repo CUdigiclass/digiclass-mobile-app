@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="CULMS.View.Dashboard.NewsPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviour="clr-namespace:CULMS.Behaviours"
+    xmlns:partialview="clr-namespace:CULMS.View.PartialView"
+    xmlns:vm="clr-namespace:CULMS.ViewModel.DashboardVM"
+    BackgroundColor="White"
+    NavigationPage.HasNavigationBar="False">
+    <ContentPage.BindingContext>
+        <vm:NewsPageVM x:Name="vm" />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid>
+            <Grid RowDefinitions="60,*,60">
+                <ScrollView Grid.Row="1" VerticalScrollBarVisibility="Never">
+                    <StackLayout>
+                        <!--<Image Source="https://culmsimages.s3.ap-south-1.amazonaws.com/newsthumNail-36/B98A5648.JPG" />-->
+                        <StackLayout x:Name="NewsList" BindableLayout.ItemsSource="{Binding NewsList}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame
+                                        x:Name="MainFrame"
+                                        Padding="0"
+                                        BackgroundColor="WhiteSmoke"
+                                        CornerRadius="20"
+                                        HasShadow="False"
+                                        IsClippedToBounds="True">
+                                        <Grid Margin="20,20,20,10" RowDefinitions="Auto,Auto,Auto,50">
+                                            <Frame
+                                                Padding="0"
+                                                BackgroundColor="Green"
+                                                CornerRadius="20"
+                                                HasShadow="False"
+                                                IsClippedToBounds="True">
+                                                <Image
+                                                    Aspect="AspectFit"
+                                                    BackgroundColor="Gray"
+                                                    Source="{Binding ThumbNailUrl}" />
+                                            </Frame>
+                                            <Label
+                                                Grid.Row="1"
+                                                FontAttributes="Bold"
+                                                FontSize="18"
+                                                Text="{Binding NewsTitle}"
+                                                TextColor="Black" />
+                                            <Label
+                                                Grid.Row="2"
+                                                Text="{Binding NewsDesc}"
+                                                TextColor="Black" />
+                                            <Button
+                                                Grid.Row="3"
+                                                Padding="0"
+                                                Command="{Binding Source={x:Reference NewsList}, Path=BindingContext.ViewSourceCommand}"
+                                                CommandParameter="{Binding Source={x:Reference MainFrame}, Path=BindingContext}"
+                                                CornerRadius="20"
+                                                HeightRequest="40"
+                                                HorizontalOptions="EndAndExpand"
+                                                Text="View Source"
+                                                TextColor="White"
+                                                TextTransform="None"
+                                                VerticalOptions="CenterAndExpand"
+                                                WidthRequest="120">
+                                                <Button.Background>
+                                                    <!--  StartPoint defaults to (0,0)  -->
+                                                    <LinearGradientBrush EndPoint="1,0">
+                                                        <GradientStop Offset="0.1" Color="#160101" />
+                                                        <GradientStop Offset="1.0" Color="#920606" />
+                                                    </LinearGradientBrush>
+                                                </Button.Background>
+                                                <!--<Label
+                                                    FontSize="15"
+                                                    HorizontalOptions="CenterAndExpand"
+                                                    Text="View Source"
+                                                    TextColor="White"
+                                                    VerticalOptions="CenterAndExpand" />-->
+                                            </Button>
+                                        </Grid>
+                                    </Frame>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                            <BindableLayout.EmptyView>
+                                <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                    <Label
+                                        Margin="0,20,0,0"
+                                        FontAttributes="Bold"
+                                        Text="No News available."
+                                        TextColor="Black" />
+                                </StackLayout>
+                            </BindableLayout.EmptyView>
+                        </StackLayout>
+
+                    </StackLayout>
+                </ScrollView>
+                <Grid>
+                    <Grid.Background>
+                        <!--  StartPoint defaults to (0,0)  -->
+                        <LinearGradientBrush EndPoint="1,0">
+                            <GradientStop Offset="0.1" Color="#160101" />
+                            <GradientStop Offset="1.0" Color="#920606" />
+                        </LinearGradientBrush>
+                    </Grid.Background>
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="22"
+                        HorizontalTextAlignment="Center"
+                        Text="News"
+                        TextColor="White"
+                        VerticalOptions="CenterAndExpand" />
+                </Grid>
+                <partialview:TabbedView Grid.Row="2" />
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

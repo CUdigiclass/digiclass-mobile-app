@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="CULMS.View.Dashboard.AllCoursePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:partialview="clr-namespace:CULMS.View.PartialView"
+    xmlns:vm="clr-namespace:CULMS.ViewModel.DashboardVM"
+    BackgroundColor="White"
+    NavigationPage.HasNavigationBar="False">
+    <ContentPage.BindingContext>
+        <vm:AllCoursePageVM x:Name="vm" />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid>
+            <Grid RowDefinitions="60,*">
+                <!--  Scrolled="ScrollView_Scrolled"  -->
+                <ScrollView
+                    x:Name="MyScrollView"
+                    Grid.Row="1"
+                    VerticalOptions="StartAndExpand">
+                    <StackLayout>
+                        <StackLayout
+                            x:Name="AllCourseList"
+                            Margin="16"
+                            BindableLayout.ItemsSource="{Binding AllCourseList}"
+                            IsClippedToBounds="True">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame
+                                        x:Name="MainGrid"
+                                        Padding="0"
+                                        CornerRadius="20"
+                                        HasShadow="False"
+                                        HeightRequest="250"
+                                        HorizontalOptions="FillAndExpand"
+                                        IsClippedToBounds="True"
+                                        VerticalOptions="CenterAndExpand"
+                                        WidthRequest="200">
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={x:Reference AllCourseList}, Path=BindingContext.CourseDetailPageCommand}" CommandParameter="{Binding Source={x:Reference MainGrid}, Path=BindingContext}" />
+                                        </Frame.GestureRecognizers>
+                                        <Grid
+                                            IsClippedToBounds="True"
+                                            RowDefinitions="78*,2*,20*"
+                                            RowSpacing="0">
+                                            <Image
+                                                Aspect="Fill"
+                                                BackgroundColor="Transparent"
+                                                Source="{Binding BannerImageName}" />
+                                            <BoxView
+                                                Grid.Row="1"
+                                                BackgroundColor="#444b53"
+                                                HorizontalOptions="FillAndExpand"
+                                                VerticalOptions="CenterAndExpand" />
+                                            <StackLayout
+                                                Grid.Row="2"
+                                                Background="#2c3138"
+                                                IsClippedToBounds="True"
+                                                Spacing="0">
+                                                <!--<Label
+                                                    Margin="5,5,0,0"
+                                                    Text="{Binding AutherName}"
+                                                    TextColor="White" />-->
+                                                <Label
+                                                    Margin="5,0,0,5"
+                                                    Text="{Binding CourseName}"
+                                                    TextColor="White"
+                                                    VerticalOptions="CenterAndExpand" />
+                                            </StackLayout>
+                                        </Grid>
+                                    </Frame>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                            <BindableLayout.EmptyView>
+                                <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="20"
+                                        Text="No Course available."
+                                        TextColor="White" />
+                                </StackLayout>
+                            </BindableLayout.EmptyView>
+                        </StackLayout>
+                    </StackLayout>
+                </ScrollView>
+                <Grid>
+                    <Grid.Background>
+                        <!--  StartPoint defaults to (0,0)  -->
+                        <LinearGradientBrush EndPoint="1,0">
+                            <GradientStop Offset="0.1" Color="#160101" />
+                            <GradientStop Offset="1.0" Color="#920606" />
+                        </LinearGradientBrush>
+                    </Grid.Background>
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="22"
+                        HorizontalTextAlignment="Center"
+                        Text="Course List"
+                        TextColor="White"
+                        VerticalOptions="CenterAndExpand" />
+                    <Frame
+                        Margin="20,0,0,0"
+                        Padding="0"
+                        CornerRadius="18"
+                        HeightRequest="36"
+                        HorizontalOptions="StartAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        WidthRequest="36">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding BackCommand}" />
+                        </Frame.GestureRecognizers>
+                        <Image
+                            BackgroundColor="White"
+                            HeightRequest="25"
+                            HorizontalOptions="CenterAndExpand"
+                            Rotation="180"
+                            Source="ForwardIcon"
+                            VerticalOptions="CenterAndExpand"
+                            WidthRequest="25">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BackCommand}" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </Frame>
+                </Grid>
+            </Grid>
+            <partialview:LoaderView IsVisible="{Binding IsLoading}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

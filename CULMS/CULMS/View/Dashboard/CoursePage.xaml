@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="CULMS.View.Dashboard.CoursePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:partialview="clr-namespace:CULMS.View.PartialView"
+    xmlns:vm="clr-namespace:CULMS.ViewModel.DashboardVM"
+    BackgroundColor="#0d0f12"
+    NavigationPage.HasNavigationBar="False">
+    <ContentPage.BindingContext>
+        <vm:CoursePageVM x:Name="vm" />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid>
+            <Grid RowDefinitions="60,*">
+                <Grid>
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="22"
+                        HorizontalTextAlignment="Center"
+                        Text="All Course"
+                        TextColor="White"
+                        VerticalOptions="CenterAndExpand" />
+                    <Frame
+                        Margin="20,0,0,0"
+                        Padding="0"
+                        CornerRadius="18"
+                        HeightRequest="36"
+                        HorizontalOptions="StartAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        WidthRequest="36">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding BackCommand}" />
+                        </Frame.GestureRecognizers>
+                        <Image
+                            BackgroundColor="White"
+                            HeightRequest="25"
+                            HorizontalOptions="CenterAndExpand"
+                            Rotation="180"
+                            Source="ForwardIcon"
+                            VerticalOptions="CenterAndExpand"
+                            WidthRequest="25">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BackCommand}" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </Frame>
+                </Grid>
+                <ScrollView Grid.Row="1">
+                    <StackLayout x:Name="AllCourseList" BindableLayout.ItemsSource="{Binding AllCourseList}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout Margin="16,0">
+                                    <StackLayout x:Name="MainStack" Orientation="Horizontal">
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={x:Reference AllCourseList}, Path=BindingContext.VideoCommand}" CommandParameter="{Binding Source={x:Reference MainStack}, Path=BindingContext}" />
+                                        </StackLayout.GestureRecognizers>
+                                        <Frame
+                                            BackgroundColor="#1e2329"
+                                            HeightRequest="30"
+                                            VerticalOptions="CenterAndExpand"
+                                            WidthRequest="60">
+                                            <Image
+                                                HeightRequest="40"
+                                                HorizontalOptions="CenterAndExpand"
+                                                Source="CodeMash"
+                                                VerticalOptions="CenterAndExpand"
+                                                WidthRequest="40" />
+                                        </Frame>
+                                        <Label
+                                            Margin="10,0,0,0"
+                                            Text="{Binding CourseName}"
+                                            TextColor="White" />
+                                    </StackLayout>
+                                    <BoxView
+                                        Margin="0,10"
+                                        BackgroundColor="LightGray"
+                                        HeightRequest="1"
+                                        HorizontalOptions="FillAndExpand"
+                                        Opacity=".5"
+                                        VerticalOptions="EndAndExpand" />
+                                </StackLayout>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                        <BindableLayout.EmptyView>
+                            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="20"
+                                    Text="No Course available."
+                                    TextColor="White" />
+                            </StackLayout>
+                        </BindableLayout.EmptyView>
+                    </StackLayout>
+                </ScrollView>
+            </Grid>
+            <partialview:LoaderView IsVisible="{Binding IsLoading}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

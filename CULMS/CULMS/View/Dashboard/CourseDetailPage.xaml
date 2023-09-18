@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="CULMS.View.Dashboard.CourseDetailPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:partialview="clr-namespace:CULMS.View.PartialView"
+    xmlns:vm="clr-namespace:CULMS.ViewModel.DashboardVM"
+    BackgroundColor="White"
+    NavigationPage.HasNavigationBar="False">
+    <ContentPage.BindingContext>
+        <vm:CourseDetailPageVM x:Name="vm" />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid>
+            <Grid RowDefinitions="60,*">
+                <Grid>
+                    <Grid.Background>
+                        <!--  StartPoint defaults to (0,0)  -->
+                        <LinearGradientBrush EndPoint="1,0">
+                            <GradientStop Offset="0.1" Color="#160101" />
+                            <GradientStop Offset="1.0" Color="#920606" />
+                        </LinearGradientBrush>
+                    </Grid.Background>
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="22"
+                        HorizontalTextAlignment="Center"
+                        Text="Course Detail"
+                        TextColor="White"
+                        VerticalOptions="CenterAndExpand" />
+                    <Frame
+                        Margin="20,0,0,0"
+                        Padding="0"
+                        CornerRadius="18"
+                        HeightRequest="36"
+                        HorizontalOptions="StartAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        WidthRequest="36">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding BackCommand}" />
+                        </Frame.GestureRecognizers>
+                        <Image
+                            BackgroundColor="White"
+                            HeightRequest="25"
+                            HorizontalOptions="CenterAndExpand"
+                            Rotation="180"
+                            Source="ForwardIcon"
+                            VerticalOptions="CenterAndExpand"
+                            WidthRequest="25">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BackCommand}" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </Frame>
+                    <!--<ImageButton
+                        Margin="0,0,16,0"
+                        BackgroundColor="Transparent"
+                        Command="{Binding DiscussionCommand}"
+                        CommandParameter="{Binding}"
+                        HeightRequest="30"
+                        HorizontalOptions="EndAndExpand"
+                        Source="discuss"
+                        VerticalOptions="CenterAndExpand"
+                        WidthRequest="30" />-->
+                </Grid>
+                <ScrollView Grid.Row="1">
+                    <StackLayout Margin="16,0" VerticalOptions="StartAndExpand">
+                        <Frame
+                            x:Name="MainGrid"
+                            Padding="0"
+                            CornerRadius="10"
+                            HasShadow="False"
+                            HorizontalOptions="FillAndExpand"
+                            IsClippedToBounds="True"
+                            VerticalOptions="StartAndExpand">
+                            <Grid
+                                IsClippedToBounds="True"
+                                RowDefinitions="200,5,Auto"
+                                RowSpacing="0">
+                                <Image
+                                    Aspect="Fill"
+                                    BackgroundColor="Transparent"
+                                    Source="{Binding CourseImage}" />
+                                <BoxView
+                                    Grid.Row="1"
+                                    BackgroundColor="#444b53"
+                                    HorizontalOptions="FillAndExpand"
+                                    VerticalOptions="CenterAndExpand" />
+                                <StackLayout
+                                    Grid.Row="2"
+                                    Background="#2c3138"
+                                    IsClippedToBounds="True"
+                                    Spacing="0">
+                                    <StackLayout Margin="10">
+                                        <Label TextColor="White">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span FontAttributes="Bold" Text="Course Name : " />
+                                                    <Span Text="{Binding CourseName}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <Label TextColor="White">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span FontAttributes="Bold" Text="Course Credit : " />
+                                                    <Span Text="{Binding CourseCredit}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <Label TextColor="White">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span FontAttributes="Bold" Text="Course Code : " />
+                                                    <Span Text="{Binding CourseCode}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <Label TextColor="White">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span FontAttributes="Bold" Text="Description : " />
+                                                    <Span Text="{Binding Description}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <Label TextColor="White">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span FontAttributes="Bold" Text="Enrolled Students : " />
+                                                    <Span Text="{Binding EnrolledCount}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <Label TextColor="White">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span FontAttributes="Bold" Text="Semester : " />
+                                                    <Span Text="{Binding Semester}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <Label TextColor="White">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span FontAttributes="Bold" Text="Course Outcome  : " />
+                                                    <Span Text="{Binding CourseOutCome}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </StackLayout>
+                                </StackLayout>
+                            </Grid>
+                        </Frame>
+                        <Grid>
+                            <Button
+                                Margin="0,20"
+                                Padding="0"
+                                BackgroundColor="#2c3138"
+                                Command="{Binding EnrollCourseCommand}"
+                                CommandParameter="{Binding}"
+                                CornerRadius="20"
+                                HeightRequest="40"
+                                HorizontalOptions="CenterAndExpand"
+                                IsVisible="{Binding IsVisibleEnrollBtn}"
+                                Text="Enroll Course"
+                                TextColor="White"
+                                WidthRequest="200" />
+                        </Grid>
+
+                        <Button
+                            Margin="0,20"
+                            Padding="0"
+                            BackgroundColor="#2c3138"
+                            Command="{Binding ViewCourseCommand}"
+                            CommandParameter="{Binding}"
+                            CornerRadius="20"
+                            HeightRequest="40"
+                            HorizontalOptions="CenterAndExpand"
+                            IsVisible="{Binding IsVisibleViewCourseBtn}"
+                            Text="View Course"
+                            TextColor="White"
+                            WidthRequest="200" />
+                    </StackLayout>
+                </ScrollView>
+            </Grid>
+            <partialview:LoaderView IsVisible="{Binding IsLoading}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

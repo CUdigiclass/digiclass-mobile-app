@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="CULMS.View.Dashboard.CourseDocumentsPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:partialview="clr-namespace:CULMS.View.PartialView"
+    xmlns:vm="clr-namespace:CULMS.ViewModel.DashboardVM"
+    NavigationPage.HasNavigationBar="False">
+    <ContentPage.BindingContext>
+        <vm:CourseDocumentsPageVM x:Name="vm" />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid>
+            <Grid RowDefinitions="60,*">
+                <ScrollView Grid.Row="1" VerticalScrollBarVisibility="Never">
+                    <StackLayout
+                        x:Name="CourseDocumentList"
+                        Margin="16"
+                        BindableLayout.ItemsSource="{Binding CourseDocumentList}"
+                        Spacing="10"
+                        VerticalOptions="StartAndExpand">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Frame
+                                    x:Name="MainFrame"
+                                    Padding="0"
+                                    BackgroundColor="WhiteSmoke"
+                                    BorderColor="LightGray"
+                                    CornerRadius="20"
+                                    HasShadow="False"
+                                    HeightRequest="100"
+                                    VerticalOptions="CenterAndExpand">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={x:Reference CourseDocumentList}, Path=BindingContext.DocumentCommand}" CommandParameter="{Binding .}" />
+                                        <!--<TapGestureRecognizer Command="{Binding Source={x:Reference CourseDocumentList}, Path=Binding.DocumentCommand}" CommandParameter="{Binding Source={x:Reference MainFrame}, Path=BindingContext}" />-->
+                                    </Frame.GestureRecognizers>
+                                    <Grid ColumnDefinitions="25*,75*">
+                                        <Image
+                                            HeightRequest="100"
+                                            HorizontalOptions="CenterAndExpand"
+                                            Source="PDF"
+                                            VerticalOptions="CenterAndExpand"
+                                            WidthRequest="75" />
+                                        <Label
+                                            Grid.Column="1"
+                                            Margin="5,0,0,0"
+                                            FontAttributes="Bold"
+                                            FontSize="18"
+                                            Text="{Binding Title}"
+                                            TextColor="Black"
+                                            VerticalOptions="CenterAndExpand" />
+                                    </Grid>
+                                </Frame>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+                </ScrollView>
+                <Grid>
+                    <Grid.Background>
+                        <!--  StartPoint defaults to (0,0)  -->
+                        <LinearGradientBrush EndPoint="1,0">
+                            <GradientStop Offset="0.1" Color="#160101" />
+                            <GradientStop Offset="1.0" Color="#920606" />
+                        </LinearGradientBrush>
+                    </Grid.Background>
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="22"
+                        HorizontalTextAlignment="Center"
+                        Text="Course Documents"
+                        TextColor="White"
+                        VerticalOptions="CenterAndExpand" />
+                    <Frame
+                        Margin="20,0,0,0"
+                        Padding="0"
+                        CornerRadius="18"
+                        HeightRequest="36"
+                        HorizontalOptions="StartAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        WidthRequest="36">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding BackCommand}" />
+                        </Frame.GestureRecognizers>
+                        <Image
+                            BackgroundColor="White"
+                            HeightRequest="25"
+                            HorizontalOptions="CenterAndExpand"
+                            Rotation="180"
+                            Source="ForwardIcon"
+                            VerticalOptions="CenterAndExpand"
+                            WidthRequest="25">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BackCommand}" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </Frame>
+                </Grid>
+            </Grid>
+            <partialview:LoaderView IsVisible="{Binding IsLoading}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

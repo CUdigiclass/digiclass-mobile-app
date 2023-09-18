@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="CULMS.View.Dashboard.SemesterWithSubjectPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:CULMS.ViewModel.DashboardVM"
+    BackgroundColor="#0d0f12"
+    NavigationPage.HasNavigationBar="False">
+    <ContentPage.BindingContext>
+        <vm:SemesterWithSubjectPageVM x:Name="vm" />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid RowSpacing="0">
+            <Grid RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid>
+                    <!--<Label
+                        FontAttributes="Bold"
+                        FontSize="22"
+                        HorizontalTextAlignment="Center"
+                        Text="Enrolled Course File List"
+                        TextColor="White"
+                        VerticalOptions="CenterAndExpand" />-->
+                    <Frame
+                        Margin="20,0,0,0"
+                        Padding="0"
+                        CornerRadius="18"
+                        HeightRequest="36"
+                        HorizontalOptions="StartAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        WidthRequest="36">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding BackCommand}" />
+                        </Frame.GestureRecognizers>
+                        <Image
+                            BackgroundColor="White"
+                            HeightRequest="25"
+                            HorizontalOptions="CenterAndExpand"
+                            Rotation="180"
+                            Source="ForwardIcon"
+                            VerticalOptions="CenterAndExpand"
+                            WidthRequest="25">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BackCommand}" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </Frame>
+                </Grid>
+                <ScrollView Grid.Row="1">
+                    <StackLayout>
+                        <Label
+                            Margin="20,10,0,0"
+                            FontAttributes="Bold"
+                            FontSize="18"
+                            Text="{Binding SemesterName}"
+                            TextColor="White" />
+                        <FlexLayout
+                            AlignContent="Start"
+                            AlignItems="Center"
+                            BindableLayout.ItemsSource="{Binding SemesterWithSubjectList}"
+                            Direction="Row"
+                            JustifyContent="SpaceAround"
+                            Wrap="Wrap">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame
+                                        Margin="5"
+                                        Padding="0"
+                                        BackgroundColor="White"
+                                        CornerRadius="10"
+                                        HasShadow="False"
+                                        HeightRequest="220"
+                                        HorizontalOptions="StartAndExpand"
+                                        IsClippedToBounds="True"
+                                        VerticalOptions="StartAndExpand"
+                                        WidthRequest="170">
+                                        <Grid Margin="10" RowDefinitions="90*,10*">
+                                            <Label Text="{Binding SubjectName}" TextColor="Black" />
+                                            <Label
+                                                Grid.Row="1"
+                                                Text="{Binding StreamName}"
+                                                TextColor="Black" />
+                                        </Grid>
+                                    </Frame>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                            <BindableLayout.EmptyView>
+                                <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="20"
+                                        Text="No available."
+                                        TextColor="White" />
+                                </StackLayout>
+                            </BindableLayout.EmptyView>
+                        </FlexLayout>
+                    </StackLayout>
+                </ScrollView>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

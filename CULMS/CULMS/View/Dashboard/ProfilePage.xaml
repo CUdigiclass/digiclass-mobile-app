@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="CULMS.View.Dashboard.ProfilePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:partialview="clr-namespace:CULMS.View.PartialView"
+    xmlns:vm="clr-namespace:CULMS.ViewModel.DashboardVM"
+    BackgroundColor="White"
+    NavigationPage.HasNavigationBar="False">
+    <ContentPage.BindingContext>
+        <vm:ProfilePageVM x:Name="vm" />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid>
+            <Grid RowDefinitions="60,*,60">
+                <Grid>
+                    <Grid.Background>
+                        <!--  StartPoint defaults to (0,0)  -->
+                        <LinearGradientBrush EndPoint="1,0">
+                            <GradientStop Offset="0.1" Color="#160101" />
+                            <GradientStop Offset="1.0" Color="#920606" />
+                        </LinearGradientBrush>
+                    </Grid.Background>
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="22"
+                        HorizontalTextAlignment="Center"
+                        Text="My Profile"
+                        TextColor="White"
+                        VerticalOptions="CenterAndExpand" />
+                </Grid>
+                <ScrollView Grid.Row="1">
+                    <Grid Margin="16" RowDefinitions="30,2,30,2,30,2,30,2">
+                        <StackLayout Orientation="Horizontal">
+                            <Image
+                                HeightRequest="20"
+                                Source="user"
+                                VerticalOptions="CenterAndExpand"
+                                WidthRequest="20" />
+                            <Label TextColor="Black" VerticalOptions="CenterAndExpand">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Name: " />
+                                        <Span Text="{Binding FirstName}" />
+                                        <Span Text=" " />
+                                        <Span Text="{Binding LastName}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </StackLayout>
+                        <BoxView
+                            Grid.Row="1"
+                            HeightRequest="1"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="CenterAndExpand">
+                            <BoxView.Background>
+                                <!--  StartPoint defaults to (0,0)  -->
+                                <LinearGradientBrush EndPoint="1,0">
+                                    <GradientStop Offset="0.1" Color="#160101" />
+                                    <GradientStop Offset="1.0" Color="#920606" />
+                                </LinearGradientBrush>
+                            </BoxView.Background>
+                        </BoxView>
+                        <StackLayout Grid.Row="2" Orientation="Horizontal">
+                            <Image
+                                HeightRequest="20"
+                                Source="Userid"
+                                VerticalOptions="CenterAndExpand"
+                                WidthRequest="20" />
+                            <Label TextColor="Black" VerticalOptions="CenterAndExpand">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="UID: " />
+                                        <Span Text="{Binding EmailId}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </StackLayout>
+                        <BoxView
+                            Grid.Row="3"
+                            HeightRequest="1"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="CenterAndExpand">
+                            <BoxView.Background>
+                                <!--  StartPoint defaults to (0,0)  -->
+                                <LinearGradientBrush EndPoint="1,0">
+                                    <GradientStop Offset="0.1" Color="#160101" />
+                                    <GradientStop Offset="1.0" Color="#920606" />
+                                </LinearGradientBrush>
+                            </BoxView.Background>
+                        </BoxView>
+                        <StackLayout Grid.Row="4" Orientation="Horizontal">
+                            <Image
+                                HeightRequest="20"
+                                Source="gender"
+                                VerticalOptions="CenterAndExpand"
+                                WidthRequest="20" />
+                            <Label TextColor="Black" VerticalOptions="CenterAndExpand">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Gender: " />
+                                        <Span Text="{Binding Gender}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </StackLayout>
+
+                        <BoxView
+                            Grid.Row="5"
+                            HeightRequest="1"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="CenterAndExpand">
+                            <BoxView.Background>
+                                <!--  StartPoint defaults to (0,0)  -->
+                                <LinearGradientBrush EndPoint="1,0">
+                                    <GradientStop Offset="0.1" Color="#160101" />
+                                    <GradientStop Offset="1.0" Color="#920606" />
+                                </LinearGradientBrush>
+                            </BoxView.Background>
+                        </BoxView>
+                        <StackLayout Grid.Row="6" Orientation="Horizontal">
+                            <Image
+                                HeightRequest="20"
+                                Source="contact"
+                                VerticalOptions="CenterAndExpand"
+                                WidthRequest="20" />
+                            <Label TextColor="Black" VerticalOptions="CenterAndExpand">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Phone No: " />
+                                        <Span Text="{Binding PhoneNumber}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </StackLayout>
+
+                        <BoxView
+                            Grid.Row="7"
+                            HeightRequest="1"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="CenterAndExpand">
+                            <BoxView.Background>
+                                <!--  StartPoint defaults to (0,0)  -->
+                                <LinearGradientBrush EndPoint="1,0">
+                                    <GradientStop Offset="0.1" Color="#160101" />
+                                    <GradientStop Offset="1.0" Color="#920606" />
+                                </LinearGradientBrush>
+                            </BoxView.Background>
+                        </BoxView>
+                    </Grid>
+                </ScrollView>
+                <partialview:TabbedView Grid.Row="2" />
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

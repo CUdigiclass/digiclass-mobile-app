@@ -1,0 +1,346 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="CULMS.View.Dashboard.QuizPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behavior="clr-namespace:CULMS.Behaviours"
+    xmlns:behaviour="clr-namespace:CULMS.Behaviours"
+    xmlns:partialview="clr-namespace:CULMS.View.PartialView"
+    xmlns:vm="clr-namespace:CULMS.ViewModel.DashboardVM"
+    BackgroundColor="White"
+    NavigationPage.HasNavigationBar="False">
+    <ContentPage.BindingContext>
+        <vm:QuizPageVM x:Name="vm" />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid>
+            <Grid RowDefinitions="60,*">
+                <ScrollView Grid.Row="1" VerticalOptions="StartAndExpand">
+                    <!--  BackgroundColor="#2c3138"  -->
+                    <StackLayout x:Name="MainStack" Margin="20,10">
+                        <StackLayout x:Name="AnswerList" BindableLayout.ItemsSource="{Binding AnswerList}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout>
+                                        <Label
+                                            FontAttributes="Bold"
+                                            FontSize="18"
+                                            TextColor="Black">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{Binding QuestionNumber}" />
+                                                    <Span Text=". " />
+                                                    <Span Text="{Binding QuestionName}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <StackLayout x:Name="TestList" BindableLayout.ItemsSource="{Binding TestList}">
+                                            <BindableLayout.ItemTemplate>
+                                                <DataTemplate>
+                                                    <!--  option frame backgournd color BackgroundColor="{Binding AnswerBackgroundColor}"  -->
+                                                    <Frame
+                                                        x:Name="MainFrame"
+                                                        Margin="1,5"
+                                                        Padding="0"
+                                                        BackgroundColor="{Binding AnswerBackgroundColor}"
+                                                        BorderColor="LightGray"
+                                                        CornerRadius="5"
+                                                        HasShadow="False">
+                                                        <Frame.GestureRecognizers>
+                                                            <TapGestureRecognizer Command="{Binding Source={x:Reference AnswerList}, Path=BindingContext.AnswerSelectedCommand}" CommandParameter="{Binding .}" />
+                                                        </Frame.GestureRecognizers>
+                                                        <Label Margin="10,10" TextColor="{Binding AnswerTextColor}">
+                                                            <Label.FormattedText>
+                                                                <FormattedString>
+                                                                    <Span Text="{Binding OptionName}" />
+                                                                    <Span Text=". " />
+                                                                    <Span Text="{Binding AnswerName}" />
+                                                                </FormattedString>
+                                                            </Label.FormattedText>
+                                                        </Label>
+                                                    </Frame>
+                                                </DataTemplate>
+                                            </BindableLayout.ItemTemplate>
+                                            <BindableLayout.EmptyView>
+                                                <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                                    <Label
+                                                        FontAttributes="Bold"
+                                                        FontSize="20"
+                                                        Text="No Quiz available."
+                                                        TextColor="White" />
+                                                </StackLayout>
+                                            </BindableLayout.EmptyView>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Button
+                                Margin="0,20,0,10"
+                                BackgroundColor="#2c3138"
+                                Command="{Binding PreviousCommand}"
+                                CommandParameter="{Binding}"
+                                CornerRadius="20"
+                                HeightRequest="40"
+                                HorizontalOptions="CenterAndExpand"
+                                IsVisible="{Binding IsVisiblePreviosBtn}"
+                                Text="Previous"
+                                TextColor="White"
+                                TextTransform="None"
+                                WidthRequest="120">
+                                <Button.Background>
+                                    <!--  StartPoint defaults to (0,0)  -->
+                                    <LinearGradientBrush EndPoint="1,0">
+                                        <GradientStop Offset="0.1" Color="#160101" />
+                                        <GradientStop Offset="1.0" Color="#920606" />
+                                    </LinearGradientBrush>
+                                </Button.Background>
+                            </Button>
+                            <Button
+                                Margin="0,20,0,10"
+                                BackgroundColor="#2c3138"
+                                Command="{Binding NextCommand}"
+                                CommandParameter="{Binding}"
+                                CornerRadius="20"
+                                HeightRequest="40"
+                                HorizontalOptions="CenterAndExpand"
+                                IsVisible="{Binding IsVisibleNextBtn}"
+                                Text="{Binding ButtonText}"
+                                TextColor="White"
+                                TextTransform="None"
+                                WidthRequest="120">
+                                <Button.Background>
+                                    <!--  StartPoint defaults to (0,0)  -->
+                                    <LinearGradientBrush EndPoint="1,0">
+                                        <GradientStop Offset="0.1" Color="#160101" />
+                                        <GradientStop Offset="1.0" Color="#920606" />
+                                    </LinearGradientBrush>
+                                </Button.Background>
+                            </Button>
+                        </StackLayout>
+                    </StackLayout>
+                </ScrollView>
+                <Grid>
+                    <Grid.Background>
+                        <!--  StartPoint defaults to (0,0)  -->
+                        <LinearGradientBrush EndPoint="1,0">
+                            <GradientStop Offset="0.1" Color="#160101" />
+                            <GradientStop Offset="1.0" Color="#920606" />
+                        </LinearGradientBrush>
+                    </Grid.Background>
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="22"
+                        HorizontalTextAlignment="Center"
+                        Text="Exam"
+                        TextColor="White"
+                        VerticalOptions="CenterAndExpand" />
+                    <StackLayout
+                        HorizontalOptions="EndAndExpand"
+                        Orientation="Horizontal"
+                        Spacing="0"
+                        VerticalOptions="CenterAndExpand">
+                        <Image
+                            BackgroundColor="Transparent"
+                            HeightRequest="20"
+                            Source="timer"
+                            VerticalOptions="CenterAndExpand"
+                            WidthRequest="20" />
+                        <Label
+                            Margin="5,0,16,0"
+                            FontAttributes="Bold"
+                            HorizontalOptions="CenterAndExpand"
+                            Text="{Binding TotalSeconds, StringFormat='{0:mm\\:ss}'}"
+                            TextColor="White" />
+
+                        <!--<Button
+                            Padding="0"
+                            Command="{Binding StartCommand}"
+                            HorizontalOptions="CenterAndExpand"
+                            Text="Start"
+                            VerticalOptions="CenterAndExpand" />
+
+                        <Button
+                            Padding="0"
+                            Command="{Binding PauseCommand}"
+                            HorizontalOptions="CenterAndExpand"
+                            Text="Pause"
+                            VerticalOptions="CenterAndExpand" />
+
+                        <Button
+                            Padding="0"
+                            Command="{Binding StopCommand}"
+                            HorizontalOptions="CenterAndExpand"
+                            Text="Stop"
+                            VerticalOptions="CenterAndExpand" />-->
+
+                    </StackLayout>
+                    <Frame
+                        Margin="20,0,0,0"
+                        Padding="0"
+                        CornerRadius="18"
+                        HeightRequest="36"
+                        HorizontalOptions="StartAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        WidthRequest="36">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ShowBackFrameCommand}" />
+                        </Frame.GestureRecognizers>
+                        <Image
+                            BackgroundColor="White"
+                            HeightRequest="25"
+                            HorizontalOptions="CenterAndExpand"
+                            Rotation="180"
+                            Source="ForwardIcon"
+                            VerticalOptions="CenterAndExpand"
+                            WidthRequest="25">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ShowBackFrameCommand}" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </Frame>
+                </Grid>
+            </Grid>
+
+            <partialview:LoaderView IsVisible="{Binding IsLoading}" />
+
+            <Grid IsVisible="{Binding IsVisibleBackFrame}">
+                <Grid.Behaviors>
+                    <behavior:FadingBehavior />
+                </Grid.Behaviors>
+                <Grid BackgroundColor="Black" Opacity=".5">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding HideBackPopupCommand}" />
+                    </Grid.GestureRecognizers>
+                </Grid>
+                <Frame
+                    Margin="30"
+                    Padding="0"
+                    CornerRadius="20"
+                    HeightRequest="150"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="CenterAndExpand">
+                    <Grid RowDefinitions="30*,70*">
+                        <Label
+                            Margin="0,20,0,0"
+                            FontSize="18"
+                            HorizontalOptions="CenterAndExpand"
+                            Text="Do you want to end quiz?"
+                            TextColor="Black" />
+                        <Grid
+                            Grid.Row="1"
+                            ColumnDefinitions="50*,50*"
+                            ColumnSpacing="20"
+                            VerticalOptions="CenterAndExpand">
+                            <Frame
+                                Padding="0"
+                                CornerRadius="20"
+                                HeightRequest="40"
+                                HorizontalOptions="EndAndExpand"
+                                WidthRequest="100">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding BackCmd}" />
+                                </Frame.GestureRecognizers>
+                                <Frame.Background>
+                                    <!--  StartPoint defaults to (0,0)  -->
+                                    <LinearGradientBrush EndPoint="1,0">
+                                        <GradientStop Offset="0.1" Color="#160101" />
+                                        <GradientStop Offset="1.0" Color="#920606" />
+                                    </LinearGradientBrush>
+                                </Frame.Background>
+                                <Label
+                                    FontSize="16"
+                                    HorizontalOptions="CenterAndExpand"
+                                    Text="Yes"
+                                    TextColor="White"
+                                    VerticalOptions="CenterAndExpand" />
+                            </Frame>
+                            <Frame
+                                Grid.Column="1"
+                                Padding="0"
+                                CornerRadius="20"
+                                HeightRequest="40"
+                                HorizontalOptions="StartAndExpand"
+                                WidthRequest="100">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding HideBackPopupCommand}" />
+                                </Frame.GestureRecognizers>
+                                <Frame.Background>
+                                    <!--  StartPoint defaults to (0,0)  -->
+                                    <LinearGradientBrush EndPoint="1,0">
+                                        <GradientStop Offset="0.1" Color="#160101" />
+                                        <GradientStop Offset="1.0" Color="#920606" />
+                                    </LinearGradientBrush>
+                                </Frame.Background>
+                                <Label
+                                    FontSize="16"
+                                    HorizontalOptions="CenterAndExpand"
+                                    Text="No"
+                                    TextColor="White"
+                                    VerticalOptions="CenterAndExpand" />
+                            </Frame>
+                        </Grid>
+                    </Grid>
+                </Frame>
+            </Grid>
+
+            <Grid IsVisible="{Binding IsVisbleSuccessFrame}">
+                <Grid.Behaviors>
+                    <behavior:FadingBehavior />
+                </Grid.Behaviors>
+                <Grid BackgroundColor="Black" Opacity=".7" />
+                <Frame
+                    Margin="16"
+                    Padding="0"
+                    CornerRadius="20"
+                    VerticalOptions="CenterAndExpand">
+                    <Frame.Background>
+                        <!--  StartPoint defaults to (0,0)  -->
+                        <LinearGradientBrush EndPoint="1,0">
+                            <GradientStop Offset="0.1" Color="#160101" />
+                            <GradientStop Offset="1.0" Color="#920606" />
+                        </LinearGradientBrush>
+                    </Frame.Background>
+                    <StackLayout Margin="20">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="18"
+                            HorizontalOptions="CenterAndExpand"
+                            Text="Quiz submited successfully."
+                            TextColor="White"
+                            VerticalOptions="CenterAndExpand" />
+                    </StackLayout>
+                </Frame>
+            </Grid>
+            <Grid IsVisible="{Binding IsVisbleTimeOverFrame}">
+                <Grid.Behaviors>
+                    <behavior:FadingBehavior />
+                </Grid.Behaviors>
+                <Grid BackgroundColor="Black" Opacity=".7" />
+                <Frame
+                    Margin="16"
+                    Padding="0"
+                    CornerRadius="20"
+                    VerticalOptions="CenterAndExpand">
+                    <Frame.Background>
+                        <!--  StartPoint defaults to (0,0)  -->
+                        <LinearGradientBrush EndPoint="1,0">
+                            <GradientStop Offset="0.1" Color="#160101" />
+                            <GradientStop Offset="1.0" Color="#920606" />
+                        </LinearGradientBrush>
+                    </Frame.Background>
+                    <StackLayout Margin="20">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="18"
+                            HorizontalOptions="CenterAndExpand"
+                            Text="Quiz Time Over."
+                            TextColor="White"
+                            VerticalOptions="CenterAndExpand" />
+                    </StackLayout>
+                </Frame>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

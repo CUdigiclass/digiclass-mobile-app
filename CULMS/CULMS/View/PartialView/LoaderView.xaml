@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="CULMS.View.PartialView.LoaderView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <ContentView.Content>
+        <Grid>
+            <Grid BackgroundColor="Black" Opacity="0.35" />
+            <ActivityIndicator
+                x:Name="activity"
+                BackgroundColor="Transparent"
+                HeightRequest="60"
+                HorizontalOptions="CenterAndExpand"
+                IsRunning="True"
+                IsVisible="True"
+                VerticalOptions="CenterAndExpand"
+                WidthRequest="60"
+                Color="White">
+                <ActivityIndicator.Scale>
+                    <OnPlatform
+                        x:TypeArguments="x:Double"
+                        Android="1.0"
+                        iOS="2.0" />
+                </ActivityIndicator.Scale>
+            </ActivityIndicator>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

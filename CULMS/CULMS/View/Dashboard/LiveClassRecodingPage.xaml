@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="CULMS.View.Dashboard.LiveClassRecodingPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:partialview="clr-namespace:CULMS.View.PartialView"
+    xmlns:vm="clr-namespace:CULMS.ViewModel.DashboardVM"
+    NavigationPage.HasNavigationBar="False">
+    <ContentPage.BindingContext>
+        <vm:LiveClassRecodingPageVM x:Name="vm" />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid>
+            <Grid RowDefinitions="60,*">
+                <ScrollView
+                    x:Name="MyScrollView"
+                    Grid.Row="1"
+                    Scrolled="ScrollView_Scrolled"
+                    VerticalOptions="StartAndExpand"
+                    VerticalScrollBarVisibility="Never">
+                    <StackLayout>
+                        <StackLayout
+                            x:Name="AllCourseList"
+                            Margin="16"
+                            BindableLayout.ItemsSource="{Binding RecordingList}"
+                            IsClippedToBounds="True">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame
+                                        x:Name="MainGrid"
+                                        Padding="0"
+                                        BackgroundColor="WhiteSmoke"
+                                        BorderColor="LightGray"
+                                        CornerRadius="20"
+                                        HasShadow="False"
+                                        HorizontalOptions="FillAndExpand"
+                                        IsClippedToBounds="True"
+                                        VerticalOptions="CenterAndExpand">
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={x:Reference AllCourseList}, Path=BindingContext.LiveClassCommand}" CommandParameter="{Binding Source={x:Reference MainGrid}, Path=BindingContext}" />
+                                        </Frame.GestureRecognizers>
+                                        <Grid IsClippedToBounds="True">
+                                            <StackLayout Margin="16">
+                                                <Label
+                                                    FontAttributes="Bold"
+                                                    FontSize="18"
+                                                    Text="{Binding Topic}"
+                                                    TextColor="Black" />
+                                                <Label TextColor="Black">
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span FontAttributes="Bold" Text="Start Time: " />
+                                                            <Span Text="{Binding StartTime}" />
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+                                                <Label TextColor="Black">
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span FontAttributes="Bold" Text="End Time: " />
+                                                            <Span Text="{Binding EndTime}" />
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+                                                <Label TextColor="Black">
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span FontAttributes="Bold" Text="Date: " />
+                                                            <Span Text="{Binding LiveDate, StringFormat='{0:MMMM dd, yyyy}'}" />
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+                                            </StackLayout>
+                                            <Button
+                                                Margin="0,0,16,0"
+                                                Padding="0"
+                                                Command="{Binding Source={x:Reference AllCourseList}, Path=BindingContext.LiveClassCommand}"
+                                                CommandParameter="{Binding Source={x:Reference MainGrid}, Path=BindingContext}"
+                                                CornerRadius="10"
+                                                HorizontalOptions="EndAndExpand"
+                                                Text="View"
+                                                TextColor="White"
+                                                TextTransform="None"
+                                                VerticalOptions="CenterAndExpand">
+                                                <Button.Background>
+                                                    <!--  StartPoint defaults to (0,0)  -->
+                                                    <LinearGradientBrush EndPoint="1,0">
+                                                        <GradientStop Offset="0.1" Color="#160101" />
+                                                        <GradientStop Offset="1.0" Color="#920606" />
+                                                    </LinearGradientBrush>
+                                                </Button.Background>
+                                            </Button>
+                                        </Grid>
+                                    </Frame>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                            <BindableLayout.EmptyView>
+                                <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="20"
+                                        Text="No Recording Available."
+                                        TextColor="Black" />
+                                </StackLayout>
+                            </BindableLayout.EmptyView>
+                        </StackLayout>
+                    </StackLayout>
+                </ScrollView>
+                <Grid>
+                    <Grid.Background>
+                        <!--  StartPoint defaults to (0,0)  -->
+                        <LinearGradientBrush EndPoint="1,0">
+                            <GradientStop Offset="0.1" Color="#160101" />
+                            <GradientStop Offset="1.0" Color="#920606" />
+                        </LinearGradientBrush>
+                    </Grid.Background>
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="22"
+                        HorizontalTextAlignment="Center"
+                        Text="Class Recordings"
+                        TextColor="White"
+                        VerticalOptions="CenterAndExpand" />
+                    <Frame
+                        Margin="20,0,0,0"
+                        Padding="0"
+                        CornerRadius="18"
+                        HeightRequest="36"
+                        HorizontalOptions="StartAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        WidthRequest="36">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding BackCommand}" />
+                        </Frame.GestureRecognizers>
+                        <Image
+                            BackgroundColor="White"
+                            HeightRequest="25"
+                            HorizontalOptions="CenterAndExpand"
+                            Rotation="180"
+                            Source="ForwardIcon"
+                            VerticalOptions="CenterAndExpand"
+                            WidthRequest="25">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BackCommand}" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </Frame>
+                </Grid>
+            </Grid>
+            <partialview:LoaderView IsVisible="{Binding IsLoading}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

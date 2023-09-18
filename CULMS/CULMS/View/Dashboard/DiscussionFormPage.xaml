@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="CULMS.View.Dashboard.DiscussionFormPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:partialview="clr-namespace:CULMS.View.PartialView"
+    xmlns:vm="clr-namespace:CULMS.ViewModel.DashboardVM"
+    NavigationPage.HasNavigationBar="False">
+    <ContentPage.BindingContext>
+        <vm:DiscussionFormPageVM x:Name="vm" />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid>
+            <Grid RowDefinitions="60,*">
+                <ScrollView
+                    x:Name="DiscussionQuestionList"
+                    Grid.Row="1"
+                    Margin="16"
+                    Scrolled="ScrollView_Scrolled"
+                    VerticalScrollBarVisibility="Never">
+                    <StackLayout BindableLayout.ItemsSource="{Binding DiscussionQuestionList}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Frame
+                                    x:Name="MainFrame"
+                                    Margin="0,10,0,0"
+                                    Padding="0"
+                                    BorderColor="LightGray"
+                                    CornerRadius="10"
+                                    HasShadow="False"
+                                    IsClippedToBounds="True">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={x:Reference DiscussionQuestionList}, Path=BindingContext.DiscussionListCommand}" CommandParameter="{Binding Source={x:Reference MainFrame}, Path=BindingContext}" />
+                                    </Frame.GestureRecognizers>
+                                    <StackLayout>
+                                        <Label
+                                            Margin="10,5,10,0"
+                                            FontAttributes="Bold"
+                                            FontSize="18"
+                                            Text="{Binding Title}"
+                                            TextColor="Black" />
+                                        <BoxView
+                                            BackgroundColor="LightGray"
+                                            HeightRequest="1"
+                                            HorizontalOptions="FillAndExpand" />
+                                        <Label
+                                            Margin="10,0,10,0"
+                                            FontSize="16"
+                                            Text="{Binding Question}"
+                                            TextColor="Black" />
+                                        <StackLayout BindableLayout.ItemsSource="{Binding DiscussionDoc}">
+                                            <BindableLayout.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Image
+                                                        Margin="5"
+                                                        Aspect="AspectFit"
+                                                        Source="{Binding FileURL}" />
+                                                </DataTemplate>
+                                            </BindableLayout.ItemTemplate>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                        <BindableLayout.EmptyView>
+                            <StackLayout>
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="18"
+                                    HorizontalTextAlignment="Center"
+                                    Text="No Content Available"
+                                    TextColor="Black" />
+                            </StackLayout>
+                        </BindableLayout.EmptyView>
+                    </StackLayout>
+                </ScrollView>
+                <Grid>
+                    <Grid.Background>
+                        <!--  StartPoint defaults to (0,0)  -->
+                        <LinearGradientBrush EndPoint="1,0">
+                            <GradientStop Offset="0.1" Color="#160101" />
+                            <GradientStop Offset="1.0" Color="#920606" />
+                        </LinearGradientBrush>
+                    </Grid.Background>
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="22"
+                        HorizontalTextAlignment="Center"
+                        Text="Discussion Forum"
+                        TextColor="White"
+                        VerticalOptions="CenterAndExpand" />
+                    <Frame
+                        Margin="20,0,0,0"
+                        Padding="0"
+                        CornerRadius="18"
+                        HeightRequest="36"
+                        HorizontalOptions="StartAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        WidthRequest="36">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding BackCommand}" />
+                        </Frame.GestureRecognizers>
+                        <Image
+                            BackgroundColor="White"
+                            HeightRequest="25"
+                            HorizontalOptions="CenterAndExpand"
+                            Rotation="180"
+                            Source="ForwardIcon"
+                            VerticalOptions="CenterAndExpand"
+                            WidthRequest="25">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BackCommand}" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </Frame>
+                </Grid>
+            </Grid>
+            <partialview:LoaderView IsVisible="{Binding IsLoading}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
