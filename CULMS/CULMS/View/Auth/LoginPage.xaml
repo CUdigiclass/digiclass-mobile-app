@@ -6,7 +6,9 @@
     xmlns:behavior="clr-namespace:CULMS.Behaviours"
     xmlns:customrenderer="clr-namespace:CULMS.CustomRenderer"
     xmlns:partialview="clr-namespace:CULMS.View.PartialView"
-    xmlns:vm="clr-namespace:CULMS.ViewModel.AuthVM">
+    xmlns:vm="clr-namespace:CULMS.ViewModel.AuthVM"
+    BackgroundColor="White"
+    NavigationPage.HasNavigationBar="False">
     <ContentPage.BindingContext>
         <vm:LoginPageVM x:Name="vm" />
     </ContentPage.BindingContext>
@@ -31,8 +33,9 @@
                         <Image
                             Margin="10"
                             Aspect="AspectFit"
+                            BackgroundColor="Transparent"
                             HorizontalOptions="CenterAndExpand"
-                            Source="Cu_logo"
+                            Source="cudigiclassIcon"
                             VerticalOptions="CenterAndExpand"
                             WidthRequest="180" />
                     </Frame>

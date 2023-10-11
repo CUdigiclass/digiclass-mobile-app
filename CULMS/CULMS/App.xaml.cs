@@ -105,7 +105,7 @@ namespace CULMS
                 Preferences.Set(StringConstant.IsLogin, false);
                 Preferences.Set("Token", null);
                 Preferences.Set(StringConstant.UserId, string.Empty);
-                Application.Current.MainPage = new LoginPage();
+                Application.Current.MainPage =new NavigationPage(new LoginPage());
             }
             catch (Exception ex)
             {

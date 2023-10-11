@@ -288,6 +288,10 @@ namespace CULMS.ViewModel.DashboardVM
                         //await Application.Current.MainPage.Navigation.PushModalAsync(new AllCoursePage());
                         await RichNavigation.PushAsync(new AllCoursePage(), typeof(AllCoursePage));
                         break;
+                    case "Change Password":
+                        //await Application.Current.MainPage.Navigation.PushModalAsync(new AllCoursePage());
+                        await RichNavigation.PushAsync(new ResetPasswordPage(), typeof(ResetPasswordPage));
+                        break;
                     //case "Exam":
                     //    await Application.Current.MainPage.Navigation.PushModalAsync(new QuizListPage());
                     //    break;
@@ -339,6 +343,7 @@ namespace CULMS.ViewModel.DashboardVM
             {
                 new CommonModel(){Text ="Catalog", CourseImage ="All_Courses"},
                 new CommonModel(){Text ="My Courses", CourseImage ="Courses"},
+                new CommonModel(){Text ="Change Password", CourseImage ="changePassword"},
                // new CommonModel(){Text ="Exam", CourseImage ="exam"},
                 //new CommonModel(){Text ="Calendar", CourseImage = "calendar"},
             };
@@ -388,7 +393,7 @@ namespace CULMS.ViewModel.DashboardVM
             Preferences.Set(StringConstant.RoleId, 0); 
             Preferences.Set("FCMToken", string.Empty);
             IsVisibleLogoutFrame = false;
-            Application.Current.MainPage = new LoginPage();
+            Application.Current.MainPage =new NavigationPage(new LoginPage());
             IsLoading = false;
         });
 

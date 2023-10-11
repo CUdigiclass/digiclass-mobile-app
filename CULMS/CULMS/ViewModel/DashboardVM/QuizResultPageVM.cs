@@ -113,7 +113,7 @@ namespace CULMS.ViewModel.DashboardVM
             try
             {
                 IsLoading = true;
-                Application.Current.MainPage = new HomePage();
+                Application.Current.MainPage = new NavigationPage(new HomePage());
             }
             catch (Exception ex)
             {

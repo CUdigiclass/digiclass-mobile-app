@@ -239,7 +239,7 @@ namespace CULMS.ViewModel.AuthVM
                 //GoogleUser = googleUser;
                 Preferences.Set(StringConstant.TabIdKey, 1);
                 Preferences.Set(StringConstant.IsLogin, true);
-                Application.Current.MainPage = new HomePage();
+                Application.Current.MainPage =new NavigationPage(new HomePage());
             }
             catch (Exception ex)
             {

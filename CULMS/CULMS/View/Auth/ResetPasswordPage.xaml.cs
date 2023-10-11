@@ -22,9 +22,5 @@ namespace CULMS.View.Auth
             //vm.IsPassword = true;
         }
 
-        private void SendOTP_Tapped(object sender, EventArgs e)
-        {
-
-        }
     }
 }

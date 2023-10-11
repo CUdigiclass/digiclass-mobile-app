@@ -313,6 +313,7 @@
                     </StackLayout>
                 </Frame>
             </Grid>
+            
             <Grid IsVisible="{Binding IsVisbleTimeOverFrame}">
                 <Grid.Behaviors>
                     <behavior:FadingBehavior />

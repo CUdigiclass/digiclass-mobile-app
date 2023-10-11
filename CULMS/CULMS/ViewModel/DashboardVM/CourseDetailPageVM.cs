@@ -269,7 +269,7 @@ namespace CULMS.ViewModel.DashboardVM
                     else
                     {
                         await Application.Current.MainPage.DisplayAlert("Alert", response.Message, "Ok");
-                        Application.Current.MainPage = new HomePage();
+                        Application.Current.MainPage =new NavigationPage(new HomePage());
                     }
                 }
             }

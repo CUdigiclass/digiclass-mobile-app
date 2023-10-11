@@ -117,6 +117,7 @@ namespace CULMS.ViewModel.DashboardVM
         }
         int courseQuizId = 0;
         double quizTime;
+        bool IsTimeStart;
         public async void QuizAPIMethod(int id, int timeduration)
         {
             try
@@ -142,7 +143,11 @@ namespace CULMS.ViewModel.DashboardVM
                         TempAnswerList.Add(new QuestionData() { Id = item.Id, QuestionName = item.QuestionName, QuestionNumber = i++, TestList = AnswerNameList });
                     }
                     AnswerList.Add(TempAnswerList[QuestionIndex]);
-                    _timer.Start();
+                    //if (IsTimeStart)
+                    //{
+                        _timer.Start();
+                    //    IsTimeStart = false;
+                    //}                    
                 }
             }
             catch (Exception ex)
@@ -185,11 +190,12 @@ namespace CULMS.ViewModel.DashboardVM
         public Command BackCmd => new Command(async () =>
         {
             try
-            {
+            {                
                 _timer.Stop();
+               // IsTimeStart = true;
                 IsVisibleBackFrame = false;
-               // await Application.Current.MainPage.Navigation.PopAsync();
-               await RichNavigation.PopAsync();
+                // await Application.Current.MainPage.Navigation.PopAsync();
+                await RichNavigation.PopAsync();
             }
             catch (Exception ex)
             {
@@ -264,7 +270,7 @@ namespace CULMS.ViewModel.DashboardVM
                         _timer.Stop();
                         await Task.Delay(1000);
                         IsVisbleSuccessFrame = false;
-                        Application.Current.MainPage = new QuizResultPage();
+                        Application.Current.MainPage =new NavigationPage(new QuizResultPage());
                     }
                     else
                     {
@@ -440,9 +446,10 @@ namespace CULMS.ViewModel.DashboardVM
                     IsVisiblePreviosBtn = false;
                     IsVisibleNextBtn = false;
                     IsVisbleTimeOverFrame = true;
+                    _timer.Stop();
                     await Task.Delay(1000);
                     IsVisbleSuccessFrame = false;
-                    Application.Current.MainPage = new QuizResultPage();
+                    Application.Current.MainPage =new NavigationPage(new QuizResultPage());
                 }
                 else
                 {
